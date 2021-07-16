@@ -13,6 +13,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+Route::get('/', function() {
+
+	return view('welcome');
+});
+
+Route::get('/blog',function() {
+	//echo "Call Method";
+	return view('blog', ['listOfName'=>array(
+		"name" => "Sharvan",
+		"email" => "9835401515" 
+	)
+]
+
+);
+});
+
+Route::get('/blogs', function() {
+
+	// return view('blogs.blog');
+	return view('blogs/blog');
+});
+
+
+
+Route::get('/test/api',function() {
+	
+	$data['result'] = array("sharvan");
+
+	// echo "<pre>";
+	// print_r($data);
+	// die;
+
+	return view('blogs/blog',$data);
 });
