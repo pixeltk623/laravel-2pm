@@ -36,8 +36,16 @@ Route::get('/blog',function() {
 
 Route::get('/blogs', function() {
 
+	$data['data'] = array("name"=>"sharvan");
 	// return view('blogs.blog');
-	return view('blogs/blog');
+	return view('blogs/blog', $data);
+});
+
+Route::get('/list', function() {
+
+	$data['data'] = array("name"=>"sharvan");
+	// return view('blogs.blog');
+	return view('blogs/list');
 });
 
 
@@ -51,4 +59,8 @@ Route::get('/test/api',function() {
 	// die;
 
 	return view('blogs/blog',$data);
+});
+
+Route::get('/admin', function() {
+	return view('admin.dashboard');
 });
