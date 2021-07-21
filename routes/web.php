@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::get('/', function() {
 	return view('welcome');
 });
 
-Route::get('/blog',function() {
+Route::get('/blog1',function() {
 	//echo "Call Method";
 	return view('blog', ['listOfName'=>array(
 		"name" => "Sharvan",
@@ -64,3 +65,5 @@ Route::get('/test/api',function() {
 Route::get('/admin', function() {
 	return view('admin.dashboard');
 });
+
+Route::get('/blog', [BlogController::class, 'index']);
