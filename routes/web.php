@@ -19,10 +19,10 @@ use App\Http\Controllers\BlogController;
 // });
 
 
-Route::get('/', function() {
+// Route::get('/', function() {
 
-	return view('welcome');
-});
+// 	return view('welcome');
+// });
 
 Route::get('/blog1',function() {
 	//echo "Call Method";
@@ -66,4 +66,8 @@ Route::get('/admin', function() {
 	return view('admin.dashboard');
 });
 
-Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/', [BlogController::class, 'index']);
+Route::get('/create', [BlogController::class, 'loadCreatePage']);
+//Route::post('/create', [BlogController::class, 'postFormData']);
+
+Route::post('/postdata', [BlogController::class, 'postDataForm'])->name('create.postdata');

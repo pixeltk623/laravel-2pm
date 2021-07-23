@@ -1,3 +1,4 @@
+
 {{-- @extends('blogs/layout')
 @section('page_title','Manage Blade')
 @section('description','PHP Training')
@@ -52,7 +53,16 @@
 
 <div class="container">
   <h2>Bordered Table</h2>
-  <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>            
+  <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>     
+
+  <a href="{{ url('/create') }}" class="btn btn-primary">Add Blog</a>
+  <br><br>
+
+  @if(Session::has('message'))
+    <div class="alert alert-success">
+        {{ Session::get('message') }}
+    </div>
+  @endif
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -60,6 +70,8 @@
         <th>Title</th>
         <th>Source</th>
         <th>Description</th>
+        <th>Created At</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -69,6 +81,12 @@
       	<td>{{$blog['title']}}</td>
       	<td>{{$blog['source']}}</td>
       	<td>{{$blog['description']}}</td>
+        <td> {{ $blog['created_at']->format('Y-m-d') }}</td>
+        <td>
+            <a href="" class="btn btn-primary">Show</a>
+            <a href="" class="btn btn-warning">Edit</a>
+            <a href="" class="btn btn-danger">Delete</a>
+        </td>
       </tr>
      @endforeach
     </tbody>
