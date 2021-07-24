@@ -89,9 +89,16 @@
       	<td>{{$blog['description']}}</td>
         <td> {{ $blog['created_at']->format('Y-m-d') }}</td>
         <td>
+          
             <a href="{{ url('show') }}/{{ $blog['id'] }}" class="btn btn-primary">Show</a>
             <a href="{{ url('edit') }}/{{ $blog['id'] }}" class="btn btn-warning">Edit</a>
             <a href="{{ url('delete') }}/{{ $blog['id'] }}" class="btn btn-danger">Delete</a>
+
+            <form method="post" action="{{ route('deleteFormData') }}">
+              @csrf
+                <input type="hidden" name="did" value="{{ $blog['id'] }}">
+                <input type="submit" name="submit" value="Delete" class="btn btn-primary">
+            </form>
         </td>
       </tr>
      @endforeach

@@ -76,6 +76,8 @@ Route::get('/show/{id}', [BlogController::class, 'showData']);
 Route::get('/edit/{id}', [BlogController::class, 'editData']);
 Route::post('/update', [BlogController::class, 'updateData'])->name('create.update');
 
+Route::post('/deleteFormData', [BlogController::class, 'deleteDataForm'])->name('deleteFormData');
+
 
 /* ---------------------------------------*/
 

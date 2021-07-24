@@ -133,4 +133,13 @@ class BlogController extends Controller
         return redirect('/');
 
     }
+
+    public function deleteDataForm(Request $request) {
+
+        $blog = Blog::find($request->post('did'));
+        $blog->delete();
+        $request->session()->flash('message_d','Blog Deleted');
+        return redirect('/');
+
+    }
 }
