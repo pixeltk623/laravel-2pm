@@ -71,3 +71,15 @@ Route::get('/create', [BlogController::class, 'loadCreatePage']);
 //Route::post('/create', [BlogController::class, 'postFormData']);
 
 Route::post('/postdata', [BlogController::class, 'postDataForm'])->name('create.postdata');
+Route::get('/delete/{id}', [BlogController::class, 'deleteData']);
+Route::get('/show/{id}', [BlogController::class, 'showData']);
+Route::get('/edit/{id}', [BlogController::class, 'editData']);
+Route::post('/update', [BlogController::class, 'updateData'])->name('create.update');
+
+
+/* ---------------------------------------*/
+
+
+Route::get('manage_form', [BlogController::class, 'manage_form']);
+Route::get('manage_form/{id}', [BlogController::class, 'manage_form']);
+Route::post('manage_process', [BlogController::class, 'manage_process'])->name('manage_process');

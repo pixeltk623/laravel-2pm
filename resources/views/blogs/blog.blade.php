@@ -63,6 +63,12 @@
         {{ Session::get('message') }}
     </div>
   @endif
+
+  @if(Session::has('message_d'))
+    <div class="alert alert-danger">
+        {{ Session::get('message_d') }}
+    </div>
+  @endif
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -83,9 +89,9 @@
       	<td>{{$blog['description']}}</td>
         <td> {{ $blog['created_at']->format('Y-m-d') }}</td>
         <td>
-            <a href="" class="btn btn-primary">Show</a>
-            <a href="" class="btn btn-warning">Edit</a>
-            <a href="" class="btn btn-danger">Delete</a>
+            <a href="{{ url('show') }}/{{ $blog['id'] }}" class="btn btn-primary">Show</a>
+            <a href="{{ url('edit') }}/{{ $blog['id'] }}" class="btn btn-warning">Edit</a>
+            <a href="{{ url('delete') }}/{{ $blog['id'] }}" class="btn btn-danger">Delete</a>
         </td>
       </tr>
      @endforeach
