@@ -12,6 +12,11 @@ class BlogController extends Controller
 
     	$blog['blog'] = Blog::all();
 
+        // echo "<pre>";
+
+        // print_r($blog);
+        // die;
+
     	return view('blogs.blog', $blog);
     }
 
@@ -99,7 +104,8 @@ class BlogController extends Controller
                 'id' => $blogs['id'],
                 'title' => $blogs['title'],
                 'source' => $blogs['source'],
-                'description' => $blogs['description']
+                'description' => $blogs['description'],
+                'file' => $blogs['file']
 
             );
         } else {
@@ -107,7 +113,8 @@ class BlogController extends Controller
                 'id' => 0,
                 'title' => '',
                 'source' => '',
-                'description' => ''
+                'description' => '',
+                'file' => ''
 
             );
         }
@@ -117,12 +124,46 @@ class BlogController extends Controller
 
     public function manage_process(Request $request, $id=null) {
 
+        // $validated = $request->validate([
+        //     'title' => 'required',
+        //     'source' => 'required',
+        //     'description' => 'required',
+        //     'file' => 'required|mimes:jpg,png'
+        // ]);
+
         if($request->post('id')>0) {
             $blog = Blog::find($request->post('id'));
             $message =  "Updated";
         } else {
             $blog = new Blog();
             $message =  "Inserted";
+        }
+
+        if ($request->hasFile('file')) {
+
+            $extension = $request->file->extension();
+            $fileName = time().".".$extension;
+          //  echo $path = $request->file->store('images');
+
+            $path = $request->file->storeAs('public', $fileName);
+            $blog->file = $fileName;
+             // echo "<pre>";
+             //  print_r( $request->file('file'));
+             //print_r( $request->file('file')->getClientOriginalName());
+            // echo $file = $request->file('file');
+            // print_r( $request->file('file') );
+
+            // echo $path = $request->file->path();
+
+            // echo "<br>";
+
+            // echo $extension = $request->file->extension();
+            // echo $file = $request->file('file');
+
+            // echo "<br>";
+            // echo $file = $request->file;
+
+            //echo $request->file('file')->isValid();
         }
 
         $blog->title = $request->post('title');

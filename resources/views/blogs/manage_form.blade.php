@@ -25,7 +25,7 @@
   <h2>Bordered Table</h2>
   <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>  
 
-  <form method="post" action="{{ route('manage_process') }}">
+  <form method="post" action="{{ route('manage_process') }}" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
         <label>Title</label>
@@ -45,6 +45,14 @@
             <option value="Website" {{ ($blog['source']=='Website') ? 'selected' : '' }}>Website</option>
         </select>
         @error('source')
+            <br>
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group">
+      <label>File</label>
+      <input type="file" name="file" class="form-control-file">
+      @error('file')
             <br>
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror

@@ -69,12 +69,17 @@
         {{ Session::get('message_d') }}
     </div>
   @endif
+
+  {{-- <img src="{{ asset('storage/media/1627288598.jpg') }}" width="80"> --}}
+
+
   <table class="table table-bordered">
     <thead>
       <tr>
       	<th>Sr.No</th>
         <th>Title</th>
         <th>Source</th>
+        <th>Image</th>
         <th>Description</th>
         <th>Created At</th>
         <th>Action</th>
@@ -86,8 +91,11 @@
       	<td>{{ ++$key }}</td>
       	<td>{{$blog['title']}}</td>
       	<td>{{$blog['source']}}</td>
-      	<td>{{$blog['description']}}</td>
+
+         <td><img src="{{ asset('storage/'.$blog['file'])}}" width="80"></td>
         <td> {{ $blog['created_at']->format('Y-m-d') }}</td>
+      	<td>{{$blog['description']}}</td>
+       
         <td>
           
             <a href="{{ url('show') }}/{{ $blog['id'] }}" class="btn btn-primary">Show</a>
