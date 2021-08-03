@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
+
+use App\Http\Middleware\AdminAuth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -62,10 +67,26 @@ Route::get('/test/api',function() {
 	return view('blogs/blog',$data);
 });
 
-Route::get('/admin', function() {
-	return view('admin.dashboard');
-});
+Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/update-password', [AdminController::class, 'updatePassword']);
 
+Route::post('/auth', [AdminController::class, 'auth'])->name('admin.auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin_auth');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(AdminAuth::class);
+
+Route::get('/logout',function() {
+		session()->forget('Is_Login');
+        session()->forget('user_id');
+        session()->flash('error', 'You are Logout Now');
+       	return redirect('admin');
+	});
+
+// Route::group(['middleware'=>'admin_auth'], function()
+// {
+// 	Route::get('/dashboard', [DashboardController::class, 'index']);
+// });
 Route::get('/', [BlogController::class, 'index']);
 Route::get('/create', [BlogController::class, 'loadCreatePage']);
 //Route::post('/create', [BlogController::class, 'postFormData']);
