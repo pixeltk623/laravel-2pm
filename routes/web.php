@@ -7,6 +7,10 @@ use App\Http\Controllers\DashboardController;
 
 use App\Http\Middleware\AdminAuth;
 
+use App\Http\Controllers\ProductController;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +78,9 @@ Route::post('/auth', [AdminController::class, 'auth'])->name('admin.auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('admin_auth');
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(AdminAuth::class);
+Route::group(['middleware'=>'admin_auth'], function() {
+	Route::get('/dashboard', [DashboardController::class, 'index']);
+});
 
 Route::get('/logout',function() {
 		session()->forget('Is_Login');
@@ -106,3 +112,7 @@ Route::post('/deleteFormData', [BlogController::class, 'deleteDataForm'])->name(
 Route::get('manage_form', [BlogController::class, 'manage_form']);
 Route::get('manage_form/{id}', [BlogController::class, 'manage_form']);
 Route::post('manage_process', [BlogController::class, 'manage_process'])->name('manage_process');
+
+Route::get('/product', [ProductController::class, 'index']);
+
+Route::get('/addToCart/{id}', [ProductController::class, 'addToCart']);
