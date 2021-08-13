@@ -18,14 +18,14 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->string('source');
             $table->longText('description');
-            $table->timestamps();
+            $table->timestamps();   
         });
     }
 
     /**
      * Reverse the migrations.
      *
-     * @return void
+    * @return void
      */
     public function down()
     {
