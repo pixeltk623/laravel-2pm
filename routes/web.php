@@ -116,3 +116,7 @@ Route::post('manage_process', [BlogController::class, 'manage_process'])->name('
 Route::get('/product', [ProductController::class, 'index']);
 
 Route::get('/addToCart/{id}', [ProductController::class, 'addToCart']);
+Route::get('/Checkout', [ProductController::class, 'checkout']);
+
+Route::post('/update', [ProductController::class, 'update']);
+Route::get('/delete/{id}', [ProductController::class, 'delete']);

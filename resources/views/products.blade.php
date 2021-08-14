@@ -1,3 +1,7 @@
+<?php 
+  
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,18 +29,29 @@
             $total = 0;
         @endphp
 
-        @foreach(session('cart') as $id => $dataValue)
+         @if (session('cart'))
+            @foreach(session('cart') as $id => $dataValue)
             @php $total = $total+1; @endphp
-        @endforeach
+          @endforeach
+          @endif
+
 
         <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Cart <span class="badge bg-secondary">{{$total}}</span>
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width: 100%;"> 
-            <div><a class="dropdown-item" href="#">Action</a></div>
-            <div><a class="dropdown-item" href="#">Another action</a></div>
-            <div><a class="dropdown-item" href="#">Something else here</a></div>
+            <div class="card">
+              <div class="card-body">
+                <?php 
+                  echo "<pre>";
+
+                  print_r(session('cart'));
+                ?>
+
+                <a href="Checkout" class="btn btn-warning">Continue to Checkout</a>
+              </div>
+            </div>
           </div>
         </div>
 
