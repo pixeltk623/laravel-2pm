@@ -120,3 +120,13 @@ Route::get('/Checkout', [ProductController::class, 'checkout']);
 
 Route::post('/update', [ProductController::class, 'update']);
 Route::get('/delete/{id}', [ProductController::class, 'delete']);
+
+Route::post('/payment', [ProductController::class, 'sendPayemnt']);
+
+Route::get('/stripe', function(){
+
+	return view('stripe');
+
+});
+
+Route::post('/stripe-token', [ProductController::class, 'createToken']);

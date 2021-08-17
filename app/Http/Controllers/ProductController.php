@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Redirect;
+use Stripe;
+
 
 class ProductController extends Controller
 {
@@ -99,6 +101,43 @@ class ProductController extends Controller
 
         $request->session()->flash('msg','Product Removed from Cart');
         return redirect('/Checkout');
+    }
+
+    public function sendPayemnt(Request $request) {
+
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe\Charge::create ([
+                "amount" => 100 * 100,
+                "currency" => "inr",
+                "source" => $request->post('tokenId'),
+                "description" => "This payment is tested purpose phpcodingstuff.com"
+        ]);
+   
+        Session::flash('success', 'Payment successful!');
+           
+        return back();
+    }
+
+
+    public function createToken(Request $request) {
+
+        $stripe = new \Stripe\StripeClient('sk_test_4NBbDxxVc50ogIZOEARYRKNP00AnsXYzDi');
+
+        $token = $stripe->tokens->create([
+          'card' => [
+            'number' => '4242424242424242',
+            'exp_month' => 8,
+            'exp_year' => 2022,
+            'cvc' => '314',
+          ],
+        ]);
+
+        return json_encode($token['id']);
+
+        //$this->sendPayemnt($token->id);
+        // echo "<pre>";
+
+        // print_r($token);
     }
 
 }

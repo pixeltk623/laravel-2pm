@@ -43,12 +43,14 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="width: 100%;"> 
             <div class="card">
               <div class="card-body">
-                <?php 
-                  echo "<pre>";
-
-                  print_r(session('cart'));
-                ?>
-
+                
+                @foreach(session('cart') as $key => $value)
+                    <div>
+                        <h4>{{$value['name']}}</h4>
+                      <img src="{{$value['image']}}" width="100"> {{$value['price']}}
+                    </div>
+                @endforeach
+                <br>
                 <a href="Checkout" class="btn btn-warning">Continue to Checkout</a>
               </div>
             </div>
